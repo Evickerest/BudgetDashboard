@@ -7,6 +7,7 @@ public class TransactionType
 {
     [Key]
     public int Id { get; set; }
+    [Required]
     public string Type { get; set; } = null!;
 
     [InverseProperty(nameof(Budget.TransactionType))]

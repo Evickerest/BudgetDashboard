@@ -11,6 +11,7 @@ public class Transaction
     public int AccountId { get; set; }
     [ForeignKey(nameof(TransactionType))]
     public int TransactionTypeId { get; set; }
+    [Required]
     public decimal Value {  get; set; }
     public DateTime DateEntered { get; set; }
     public DateTime? TransactionDate { get; set;  }

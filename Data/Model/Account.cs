@@ -7,6 +7,7 @@ public class Account
 {
     [Key]
     public int Id { get; set; }
+    [Required]
     public string Name { get; set; } = null!;
     public decimal Balance { get; set; }
     public bool IsCredit { get; set; } = false;

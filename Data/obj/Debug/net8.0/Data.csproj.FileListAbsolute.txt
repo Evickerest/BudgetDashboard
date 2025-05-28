@@ -12,3 +12,4 @@ C:\Users\aweso\source\repos\BudgetDashboard\Data\obj\Debug\net8.0\refint\Data.dl
 C:\Users\aweso\source\repos\BudgetDashboard\Data\obj\Debug\net8.0\Data.pdb
 C:\Users\aweso\source\repos\BudgetDashboard\Data\obj\Debug\net8.0\Data.genruntimeconfig.cache
 C:\Users\aweso\source\repos\BudgetDashboard\Data\obj\Debug\net8.0\ref\Data.dll
+C:\Users\aweso\source\repos\BudgetDashboard\Data\obj\Debug\net8.0\Data.sourcelink.json
