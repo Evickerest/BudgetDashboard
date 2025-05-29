@@ -3,9 +3,5 @@
 ################################################################################
 
 /.vs
-/API/bin/Debug/net8.0
-/Dashboard/obj
-/Data/obj
-/Data/bin
-/API/obj
-/API/bin
+bin
+obj
