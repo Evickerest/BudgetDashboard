@@ -1,0 +1,18 @@
+<table>
+    <thead>
+        <tr>
+            <th>Value</th>
+            <th>Type</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of transactions$ | async">
+            <td>{{ t.value }}</td>
+            <td>{{ t.transactionType.type }}</td>
+            <td>{{ t.transactionDate | date:"MM/dd/yyyy"}}</td>
+        </tr>
+    </tbody> 
+</table>
+
+

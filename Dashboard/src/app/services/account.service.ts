@@ -23,7 +23,7 @@ export class AccountService {
             .pipe(catchError(() => of(undefined))) 
     }
 
-    createAcount(account: Account): Observable<Account | undefined> {
+    createAccount(account: Account): Observable<Account | undefined> {
         return this.http
             .post<Account>(this.baseUrl, account)
             .pipe(catchError(() => of(undefined))) 
