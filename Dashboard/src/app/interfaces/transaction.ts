@@ -1,8 +1,9 @@
 export interface Transaction {
     id: number,
-    accountId: number,
-    transactionTypeId: number,
+    accountName: string,
+    transactionType: string,
     value: number,
     dateEntered: string,
-    transactionDate: string
-}
+    transactionDate: string,
+};
+

@@ -21,4 +21,17 @@ public class Transaction
 
     [InverseProperty(nameof(TransactionType.Transactions))]
     public virtual TransactionType TransactionType { get; set; } = null!;
+
+    public TransactionDto ToDto()
+    {
+        return new TransactionDto
+        {
+            Id = Id,
+            AccountName = Account.Name,
+            TransactionType = TransactionType.Type,
+            Value = Value,
+            DateEntered = DateEntered,
+            TransactionDate = TransactionDate
+        };
+    }
 }

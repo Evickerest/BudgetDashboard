@@ -18,4 +18,16 @@ public class Budget
 
     [InverseProperty(nameof(TransactionType.Budgets))]
     public virtual TransactionType TransactionType { get; set; } = null!;
+
+    public BudgetDto ToDto()
+    {
+        return new BudgetDto
+        {
+            Id = Id,
+            TransactionTypeId = TransactionTypeId,
+            StartRange = StartRange,
+            EndRange = EndRange,
+            GoalAmount = GoalAmount
+        };
+    }
 }

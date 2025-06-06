@@ -4,4 +4,5 @@ export interface Budget {
     startRange: string,
     endRange: string,
     goalAmount: number
-}
+}; 
+

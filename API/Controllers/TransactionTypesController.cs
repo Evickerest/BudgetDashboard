@@ -11,20 +11,26 @@ namespace API.Controllers
         private ApplicationContext dbContext = new();
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransactionType[]))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransactionTypeDto[]))]
         public IActionResult GetTransactionTypes()
         {
-            List<TransactionType> transactionTypes = dbContext.TransactionTypes.ToList();
+            var transactionTypes = dbContext.TransactionTypes.
+                Select(t => t.ToDto()).
+                ToList();
+
             return Ok(transactionTypes);
         }
 
         [HttpGet("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransactionType))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransactionTypeDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetTransactionType(int id)
-        {
-            TransactionType? transactionType = dbContext.TransactionTypes.Find(id);
-            return (transactionType != null) ? Ok(transactionType) : NotFound($"Could not find transactionType with id {id}");
+        { 
+            var transactionType = dbContext.TransactionTypes.Find(id);
+
+            if (transactionType == null) return NotFound($"Could not find transactionType with id {id}");
+
+            return Ok(transactionType.ToDto());
         }
 
         [HttpPost]
@@ -34,21 +40,23 @@ namespace API.Controllers
         {
             dbContext.TransactionTypes.Add(transactionType);
             dbContext.SaveChanges();
-            return CreatedAtAction(nameof(GetTransactionType), new { id = transactionType.Id }, transactionType);
+
+            return Created();
         }
 
         [HttpPut("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransactionType))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdateTransactionType(TransactionType transactionType, int id)
         {
-            TransactionType? transactionTypeDb = dbContext.TransactionTypes.Find(id);
+            var transactionTypeDb = dbContext.TransactionTypes.Find(id);
 
             if (transactionTypeDb == null) return NotFound($"Could not find transactionType with id {id}.");
             if (transactionTypeDb.Id != id) return BadRequest("transactionType id does not match putted Id.");
 
-            dbContext.TransactionTypes.Entry(transactionTypeDb).CurrentValues.SetValues(transactionType);
+            transactionTypeDb.Type = transactionType.Type;
+
             dbContext.SaveChanges();
 
             return Ok(transactionType);
@@ -60,9 +68,12 @@ namespace API.Controllers
         public IActionResult DeleteTransactionType(int id)
         {
             TransactionType? transactionType = dbContext.TransactionTypes.Find(id);
+
             if (transactionType == null) return NotFound($"Could not find transactionType with id {id}");
+
             dbContext.TransactionTypes.Remove(transactionType);
             dbContext.SaveChanges();
+
             return Ok();
         }
     }

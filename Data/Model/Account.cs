@@ -14,4 +14,15 @@ public class Account
 
     [InverseProperty(nameof(Transaction.Account))]
     public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
+
+    public AccountDto ToDto()
+    {
+        return new AccountDto
+        {
+            Id = Id,
+            Name = Name,
+            Balance = Balance,
+            IsCredit = IsCredit
+        };
+    }
 }
